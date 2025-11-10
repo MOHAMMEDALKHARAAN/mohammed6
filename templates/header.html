@@ -1,4 +1,3 @@
-<!-- C:\Users\mohammed.kharaan\mytest\templates\header.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -13,6 +12,9 @@
             align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             font-family: 'Cairo', sans-serif;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         header .logo {
@@ -32,17 +34,54 @@
         header nav a:hover {
             color: #806b4e;
         }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            color: #4b3d2a;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #d8c6a0, #e6d5b8);
+            border: none;
+            border-radius: 20px;
+            padding: 6px 15px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: bold;
+            color: #4b3d2a;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: linear-gradient(135deg, #e6d5b8, #f5e6ca);
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">SH</div>
+
         <nav>
-            <a href="#">الرئيسية</a>
+            <a href="/">الرئيسية</a>
             <a href="#">المنتجات</a>
             <a href="#">عنا</a>
             <a href="#">اتصل بنا</a>
         </nav>
+
+        <!-- 🔹 عرض الترحيب بالمستخدم أو روابط الدخول -->
+        <div class="user-info">
+            {% if request.user.is_authenticated %}
+                <span>مرحبًا {{ request.user.username }} 👋</span>
+                <a href="{% url 'accounts:logout' %}" class="logout-btn">تسجيل الخروج</a>
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="logout-btn">تسجيل الدخول</a>
+                <a href="{% url 'accounts:register' %}" class="logout-btn">إنشاء حساب</a>
+            {% endif %}
+        </div>
     </header>
 </body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء حساب جديد</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5e6ca, #e6d5b8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        h2 {
+            color: #4b3d2a;
+            margin-bottom: 20px;
+        }
+
+        form input, form textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #d8c6a0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        button {
+            background: linear-gradient(135deg, #d8c6a0, #e6d5b8);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            color: #4b3d2a;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            color: #4b3d2a;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>إنشاء حساب جديد</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">تسجيل</button>
+        </form>
+
+        <a href="{% url 'accounts:login' %}">لديك حساب؟ تسجيل الدخول</a>
+    </div>
+</body>
+</html>
