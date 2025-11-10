@@ -2,13 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
     <style>
-        /* 🟤 إعدادات الرأس العامة */
+        /* 🎨 إعدادات الرأس العامة */
         header {
             background: rgba(250, 245, 235, 0.9);
             backdrop-filter: blur(8px);
             color: #4b3d2a;
-            padding: 15px 40px;
+            padding: 12px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -16,33 +17,47 @@
             top: 0;
             z-index: 1000;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             font-family: 'Cairo', sans-serif;
         }
 
-        /* تأثير عند التمرير */
         header.scrolled {
             background: rgba(245, 230, 202, 0.95);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* شعار الموقع */
+        /* 🖼️ الشعار */
         .logo {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #3b2b16;
-            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: transform 0.2s ease;
+            gap: 10px;
+            text-decoration: none;
+            color: #3b2b16;
+            font-weight: bold;
+            font-size: 1.4em;
+            transition: transform 0.25s ease;
         }
 
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
 
-        /* قائمة التنقل */
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e8d8b6;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .logo img:hover {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: 0 0 10px rgba(160, 140, 90, 0.5);
+        }
+
+        /* 📋 القائمة */
         nav {
             display: flex;
             gap: 25px;
@@ -76,7 +91,7 @@
             width: 100%;
         }
 
-        /* زر الدخول والخروج */
+        /* 🔐 الأزرار */
         .logout-btn {
             background: linear-gradient(135deg, #d8c6a0, #e6d5b8);
             border: none;
@@ -95,7 +110,7 @@
             transform: translateY(-2px);
         }
 
-        /* أيقونة السلة */
+        /* 🛒 السلة */
         .cart-icon {
             position: relative;
             font-size: 1.7em;
@@ -108,7 +123,6 @@
             transform: scale(1.1);
         }
 
-        /* عدد العناصر في السلة */
         .cart-count {
             position: absolute;
             top: -8px;
@@ -126,14 +140,13 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
 
-        /* القسم الأيمن */
+        /* ⚙️ القسم الأيمن */
         .right-side {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
-        /* معلومات المستخدم */
         .user-info {
             display: flex;
             align-items: center;
@@ -141,18 +154,20 @@
             font-weight: bold;
         }
 
-        /* 💡 تصميم متجاوب للشاشات الصغيرة */
+        /* 📱 متجاوب */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 padding: 15px;
                 gap: 10px;
             }
+
             nav {
                 gap: 15px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
+
             .right-side {
                 gap: 10px;
                 flex-wrap: wrap;
@@ -163,10 +178,13 @@
 </head>
 <body>
     <header id="main-header">
-        <!-- شعار -->
-        <a href="{% url 'core:home' %}" class="logo">🛍️ SH</a>
+        <!-- 🖼️ شعار المتجر -->
+        <a href="{% url 'core:home' %}" class="logo">
+            <img src="{% static 'images/1600w-_269k5J7vi8.jpg' %}" alt="شعار المتجر">
+            <span>SH Store</span>
+        </a>
 
-        <!-- قائمة التنقل -->
+        <!-- 📋 قائمة التنقل -->
         <nav>
             <a href="{% url 'core:home' %}">الرئيسية</a>
             <a href="{% url 'store:product_list' %}">المنتجات</a>
@@ -174,7 +192,7 @@
             <a href="{% url 'core:contact' %}">اتصل بنا</a>
         </nav>
 
-        <!-- السلة + المستخدم -->
+        <!-- 🛒 السلة + المستخدم -->
         <div class="right-side">
             <a href="{% url 'store:cart_detail' %}" class="cart-icon" title="عرض السلة">
                 🛒
@@ -195,7 +213,7 @@
         </div>
     </header>
 
-    <!-- 🎨 تأثير التمرير -->
+    <!-- ✨ تأثير التمرير -->
     <script>
         const header = document.getElementById('main-header');
         window.addEventListener('scroll', () => {
