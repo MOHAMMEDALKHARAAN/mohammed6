@@ -4,7 +4,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# ⚙️ إعدادات التطوير (غير مناسبة للإنتاج)
+# ⚙️ إعدادات التطوير (⚠️ غير مناسبة للإنتاج)
 SECRET_KEY = 'django-insecure-y9ix#$fnds-w%nijgi()csi_!=ttb08ws*1*59*&0w%41u)ss('
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -12,7 +12,7 @@ ALLOWED_HOSTS = []
 
 # 🧩 تعريف التطبيقات
 INSTALLED_APPS = [
-    # 🧱 تطبيقات Django الأساسية
+    # 🧱 تطبيقات Django الافتراضية
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -22,7 +22,7 @@ INSTALLED_APPS = [
 
     # 🧩 التطبيقات المخصصة للمشروع
     'accounts',   # إدارة المستخدمين والتوثيق
-    'store',      # المتجر والمنتجات والطلبات
+    'store',      # المتجر والمنتجات والسلة والطلبات
     'core',       # الصفحات العامة والمنطق المشترك
 ]
 
@@ -40,7 +40,7 @@ MIDDLEWARE = [
 ]
 
 
-# 📍 إعداد عناوين المشروع
+# 📍 ملف عناوين المشروع (URLs)
 ROOT_URLCONF = 'mytest.urls'
 
 
@@ -48,7 +48,7 @@ ROOT_URLCONF = 'mytest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 🟤 مجلد القوالب الرئيسي
+        # 📂 مجلد القوالب الرئيسي
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -67,7 +67,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mytest.wsgi.application'
 
 
-# 🗃️ قاعدة البيانات (SQLite الافتراضية)
+# 🗃️ إعدادات قاعدة البيانات (SQLite الافتراضية)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -76,7 +76,7 @@ DATABASES = {
 }
 
 
-# 🔐 التحقق من كلمات المرور
+# 🔐 إعدادات تحقق كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -85,22 +85,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# 🌍 الإعدادات الدولية (اللغة والموقع)
+# 🌍 الإعدادات الدولية (اللغة والمنطقة الزمنية)
 LANGUAGE_CODE = 'ar'          # اللغة الافتراضية: العربية
 TIME_ZONE = 'Asia/Riyadh'     # المنطقة الزمنية: الرياض
-USE_I18N = True
-USE_TZ = True
+USE_I18N = True               # تفعيل الترجمة
+USE_TZ = True                 # استخدام التوقيت الزمني العالمي
 
 
 # 📦 إعدادات الملفات الثابتة (Static Files)
 STATIC_URL = '/static/'
-
-# أثناء التطوير: Django يبحث داخل هذا المسار
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
-# أثناء النشر: يتم جمع الملفات هنا بالأمر
-# python manage.py collectstatic
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # أثناء التطوير
+STATIC_ROOT = BASE_DIR / 'staticfiles'    # أثناء النشر بالأمر collectstatic
 
 
 # 🖼️ إعدادات ملفات الوسائط (Media Files)
@@ -114,3 +109,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 👤 تعريف نموذج المستخدم المخصص
 AUTH_USER_MODEL = 'accounts.User'
+
+
+# 🛒 إعداد السلة (Session-Based Cart)
+CART_SESSION_ID = 'cart'
+
+
+# 🧠 إعدادات إضافية اختيارية (تحسينات التطوير)
+# عرض رسائل الأخطاء باللغة العربية
+LANGUAGES = [
+    ('ar', 'العربية'),
+    ('en', 'English'),
+]
+
+# 🔒 إعداد CSRF و Session Cookie
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False

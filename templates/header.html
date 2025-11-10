@@ -3,85 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <style>
+        /* ✨ تنسيق الشريط العلوي */
         header {
-            background: linear-gradient(135deg, #f5e6ca, #e6d5b8, #d8c6a0);
+            background: rgba(250, 245, 235, 0.9);
+            backdrop-filter: blur(8px);
             color: #4b3d2a;
             padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-family: 'Cairo', sans-serif;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Cairo', sans-serif;
         }
 
-        header .logo {
+        /* 🪶 تأثير عند التمرير */
+        header.scrolled {
+            background: rgba(245, 230, 202, 0.95);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        /* 🏷️ الشعار */
+        .logo {
             font-size: 1.8em;
             font-weight: bold;
             letter-spacing: 1px;
+            color: #3b2b16;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        header nav a {
+        /* 🔗 روابط التنقل */
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
             color: #4b3d2a;
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.3s;
         }
 
-        header nav a:hover {
+        nav a:hover {
             color: #806b4e;
         }
 
+        /* 👤 بيانات المستخدم */
         .user-info {
             display: flex;
             align-items: center;
             gap: 10px;
             font-weight: bold;
-            color: #4b3d2a;
         }
 
         .logout-btn {
             background: linear-gradient(135deg, #d8c6a0, #e6d5b8);
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 6px 15px;
             cursor: pointer;
             font-family: 'Cairo', sans-serif;
             font-weight: bold;
             color: #4b3d2a;
-            transition: 0.3s;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .logout-btn:hover {
             background: linear-gradient(135deg, #e6d5b8, #f5e6ca);
+            transform: translateY(-2px);
+        }
+
+        /* 🛒 أيقونة السلة */
+        .cart-icon {
+            position: relative;
+            font-size: 1.7em;
+            text-decoration: none;
+            color: #4b3d2a;
+            transition: transform 0.2s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* 🔴 عدد المنتجات في السلة */
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: #ff7b7b;
+            color: #fff;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.85em;
+            font-weight: bold;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 🎯 تخطيط اليمين */
+        .right-side {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">SH</div>
+    <header id="main-header">
+        <!-- 🏷️ شعار المتجر -->
+        <a href="{% url 'core:home' %}" class="logo">🛍️ SH</a>
 
+        <!-- 🔗 روابط الموقع -->
         <nav>
-            <a href="/">الرئيسية</a>
-            <a href="#">المنتجات</a>
+            <a href="{% url 'core:home' %}">الرئيسية</a>
+            <a href="{% url 'store:product_list' %}">المنتجات</a>
             <a href="#">عنا</a>
             <a href="#">اتصل بنا</a>
         </nav>
 
-        <!-- 🔹 عرض الترحيب بالمستخدم أو روابط الدخول -->
-        <div class="user-info">
-            {% if request.user.is_authenticated %}
-                <span>مرحبًا {{ request.user.username }} 👋</span>
-                <a href="{% url 'accounts:logout' %}" class="logout-btn">تسجيل الخروج</a>
-            {% else %}
-                <a href="{% url 'accounts:login' %}" class="logout-btn">تسجيل الدخول</a>
-                <a href="{% url 'accounts:register' %}" class="logout-btn">إنشاء حساب</a>
-            {% endif %}
+        <!-- 👤 المستخدم + 🛒 السلة -->
+        <div class="right-side">
+            <a href="{% url 'store:cart_detail' %}" class="cart-icon" title="عرض السلة">
+                🛒
+                {% if cart_item_count > 0 %}
+                    <span class="cart-count">{{ cart_item_count }}</span>
+                {% endif %}
+            </a>
+
+            <div class="user-info">
+                {% if request.user.is_authenticated %}
+                    <span>مرحبًا {{ request.user.username }} 👋</span>
+                    <a href="{% url 'accounts:logout' %}" class="logout-btn">تسجيل الخروج</a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="logout-btn">دخول</a>
+                    <a href="{% url 'accounts:register' %}" class="logout-btn">حساب جديد</a>
+                {% endif %}
+            </div>
         </div>
     </header>
+
+    <!-- ✨ تأثير الشفافية عند التمرير -->
+    <script>
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>

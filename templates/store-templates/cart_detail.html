@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>سلة التسوق - متجر SH</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f9f5ee;
+            color: #4b3d2a;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background: #e6d5b8;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f5ee;
+        }
+
+        .remove-btn {
+            background: #ffb0a0;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .total {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            font-size: 1.3em;
+            color: #6e5b3d;
+        }
+
+        a.back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #d8c6a0, #e6d5b8);
+            padding: 10px 25px;
+            border-radius: 25px;
+            color: #4b3d2a;
+            font-weight: bold;
+            width: fit-content;
+            margin-inline: auto;
+        }
+
+        a.back:hover {
+            background: linear-gradient(135deg, #e6d5b8, #f5e6ca);
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <h1>🛒 سلة التسوق</h1>
+
+    {% if cart %}
+        <table>
+            <tr>
+                <th>المنتج</th>
+                <th>الكمية</th>
+                <th>السعر الفردي</th>
+                <th>المجموع</th>
+                <th>إزالة</th>
+            </tr>
+            {% for item in cart %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }} ر.س</td>
+                    <td>{{ item.total_price }} ر.س</td>
+                    <td>
+                        <a href="{% url 'store:cart_remove' item.product.id %}">
+                            <button class="remove-btn">إزالة</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="total">
+            الإجمالي الكلي: {{ cart.get_total_price }} ر.س
+        </div>
+    {% else %}
+        <p class="empty">🚫 سلتك فارغة حالياً.</p>
+    {% endif %}
+
+    <a href="{% url 'store:product_list' %}" class="back">العودة للمتجر</a>
+    {% include 'footer.html' %}
+</body>
+</html>

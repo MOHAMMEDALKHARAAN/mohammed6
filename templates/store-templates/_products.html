@@ -1,11 +1,13 @@
 <style>
+    /* 🧱 شبكة عرض المنتجات */
     .products {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 25px;
-        padding: 20px 40px 80px;
+        padding: 30px 40px 80px;
     }
 
+    /* 🎁 البطاقة */
     .product-card {
         background: #fff;
         border-radius: 15px;
@@ -13,7 +15,8 @@
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         text-align: center;
-        padding-bottom: 15px;
+        padding-bottom: 20px;
+        position: relative;
     }
 
     .product-card:hover {
@@ -25,34 +28,73 @@
         width: 100%;
         height: 220px;
         object-fit: cover;
+        border-bottom: 2px solid #f0e4c3;
     }
 
     .product-card h3 {
         margin: 15px 0 8px;
-        font-size: 1.3em;
+        font-size: 1.2em;
         color: #5a472f;
     }
 
     .product-card p {
         margin: 0;
         color: #806b4e;
-        font-size: 1.1em;
+        font-size: 1.05em;
         font-weight: bold;
+    }
+
+    /* 🛒 زر إضافة إلى السلة */
+    .add-cart-btn {
+        margin-top: 15px;
+        background: linear-gradient(135deg, #d8c6a0, #e6d5b8);
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        color: #4b3d2a;
+        font-family: 'Cairo', sans-serif;
+        font-weight: bold;
+        font-size: 0.95em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-cart-btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #e6d5b8, #f5e6ca);
+    }
+
+    /* 🏷️ رسالة "لا توجد منتجات" */
+    .no-products {
+        grid-column: 1 / -1;
+        text-align: center;
+        color: #7a6547;
+        font-size: 1.2em;
+        margin-top: 40px;
     }
 </style>
 
+<!-- 🛍️ عرض المنتجات -->
 <div class="products">
     {% for product in products %}
         <div class="product-card">
             {% if product.image %}
                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
             {% else %}
-                <img src="/static/default-product.jpg" alt="منتج">
+                <img src="/static/images/default-product.jpg" alt="منتج">
             {% endif %}
+
             <h3>{{ product.name }}</h3>
             <p>{{ product.price }} ر.س</p>
+
+            <!-- 🛒 زر إضافة إلى السلة -->
+            <form action="{% url 'store:add_to_cart' product.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="add-cart-btn">🛍️ أضف إلى السلة</button>
+            </form>
         </div>
     {% empty %}
-        <p style="text-align:center; grid-column:1 / -1;">لا توجد منتجات حالياً.</p>
+        <p class="no-products">لا توجد منتجات حالياً.</p>
     {% endfor %}
 </div>
