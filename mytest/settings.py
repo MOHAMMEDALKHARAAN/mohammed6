@@ -12,7 +12,7 @@ ALLOWED_HOSTS = []
 
 # 🧩 تعريف التطبيقات
 INSTALLED_APPS = [
-    # تطبيقات Django الأساسية
+    # 🧱 تطبيقات Django الأساسية
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # التطبيقات المخصصة للمشروع
+    # 🧩 التطبيقات المخصصة للمشروع
     'accounts',   # إدارة المستخدمين والتوثيق
     'store',      # المتجر والمنتجات والطلبات
     'core',       # الصفحات العامة والمنطق المشترك
@@ -40,7 +40,7 @@ MIDDLEWARE = [
 ]
 
 
-# 📍 ملف إعداد عناوين المشروع
+# 📍 إعداد عناوين المشروع
 ROOT_URLCONF = 'mytest.urls'
 
 
@@ -48,7 +48,7 @@ ROOT_URLCONF = 'mytest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 🟤 مسار القوالب الرئيسي
+        # 🟤 مجلد القوالب الرئيسي
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -89,17 +89,17 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'ar'          # اللغة الافتراضية: العربية
 TIME_ZONE = 'Asia/Riyadh'     # المنطقة الزمنية: الرياض
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 
 # 📦 إعدادات الملفات الثابتة (Static Files)
 STATIC_URL = '/static/'
 
-# أثناء التطوير، Django سيبحث عن الملفات داخل هذا المسار
+# أثناء التطوير: Django يبحث داخل هذا المسار
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-# أثناء النشر، يتم تجميع كل الملفات هنا بأمر collectstatic
+# أثناء النشر: يتم جمع الملفات هنا بالأمر
+# python manage.py collectstatic
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 

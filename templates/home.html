@@ -27,12 +27,40 @@
             margin-top: 20px;
             color: #6e5b3d;
         }
+
+        /* 🔸 قسم المنتجات */
+        section.products-section {
+            margin-top: 60px;
+            padding: 30px 40px;
+            background: #fff;
+            border-top: 2px solid #e6d5b8;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .view-all {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            background: linear-gradient(135deg, #d8c6a0, #e6d5b8);
+            padding: 10px 25px;
+            border-radius: 25px;
+            color: #4b3d2a;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .view-all:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #e6d5b8, #f5e6ca);
+        }
     </style>
 </head>
 <body>
-    <!-- استدعاء الشريط العلوي -->
+    <!-- 🔹 الشريط العلوي -->
     {% include 'header.html' %}
 
+    <!-- 🔸 البنر الرئيسي -->
     <main>
         <h1>مرحبًا بك في متجر SH</h1>
         <p>
@@ -40,7 +68,15 @@
         </p>
     </main>
 
-    <!-- استدعاء الشريط السفلي -->
+    <!-- 🛍️ قسم عرض المنتجات -->
+    <section class="products-section">
+        {% include 'store-templates/_products.html' with products=products categories=categories selected_category=selected_category %}
+        
+        <!-- 🔘 زر عرض كل المنتجات -->
+        <a href="{% url 'store:product_list' %}" class="view-all">عرض كل المنتجات</a>
+    </section>
+
+    <!-- 🔻 الشريط السفلي -->
     {% include 'footer.html' %}
 </body>
 </html>
