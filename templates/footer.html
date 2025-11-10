@@ -8,10 +8,17 @@
             background: linear-gradient(135deg, #e6d5b8, #d8c6a0, #cbb893);
             color: #4b3d2a;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             font-family: 'Cairo', sans-serif;
             font-size: 0.9em;
             border-top: 2px solid #d8c6a0;
+
+            /* 🔸 التثبيت في الأسفل */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
         }
 
         footer a {
@@ -23,6 +30,10 @@
 
         footer a:hover {
             text-decoration: underline;
+        }
+
+        body {
+            margin-bottom: 70px; /* لإعطاء مسافة حتى لا يغطي الفوتر المحتوى */
         }
     </style>
 </head>

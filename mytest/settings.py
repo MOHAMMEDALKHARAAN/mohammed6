@@ -1,10 +1,10 @@
 from pathlib import Path
 
-# 📁 بناء المسارات داخل المشروع
+# 📁 المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# ⚙️ إعدادات سريعة للتطوير (غير مناسبة للإنتاج)
+# ⚙️ إعدادات التطوير (غير مناسبة للإنتاج)
 SECRET_KEY = 'django-insecure-y9ix#$fnds-w%nijgi()csi_!=ttb08ws*1*59*&0w%41u)ss('
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -12,7 +12,7 @@ ALLOWED_HOSTS = []
 
 # 🧩 تعريف التطبيقات
 INSTALLED_APPS = [
-    # تطبيقات Django الافتراضية
+    # تطبيقات Django الأساسية
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  # لدعم اللغات
+    'django.middleware.locale.LocaleMiddleware',  # لدعم اللغات المتعددة
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -40,7 +40,7 @@ MIDDLEWARE = [
 ]
 
 
-# 📍 ملف إعدادات عناوين المشروع
+# 📍 ملف إعداد عناوين المشروع
 ROOT_URLCONF = 'mytest.urls'
 
 
@@ -48,7 +48,7 @@ ROOT_URLCONF = 'mytest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 🔹 تعريف مجلد القوالب العام في المسار الذي حددته
+        # 🟤 مسار القوالب الرئيسي
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -67,7 +67,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mytest.wsgi.application'
 
 
-# 🗃️ قاعدة البيانات
+# 🗃️ قاعدة البيانات (SQLite الافتراضية)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,27 +86,31 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # 🌍 الإعدادات الدولية (اللغة والموقع)
-LANGUAGE_CODE = 'ar'          # اللغة العربية
+LANGUAGE_CODE = 'ar'          # اللغة الافتراضية: العربية
 TIME_ZONE = 'Asia/Riyadh'     # المنطقة الزمنية: الرياض
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
 
-# 📦 الملفات الثابتة (Static Files)
+# 📦 إعدادات الملفات الثابتة (Static Files)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # مجلد الملفات الثابتة أثناء التطوير
-STATIC_ROOT = BASE_DIR / 'staticfiles'    # مجلد التجميع للإنتاج
+
+# أثناء التطوير، Django سيبحث عن الملفات داخل هذا المسار
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# أثناء النشر، يتم تجميع كل الملفات هنا بأمر collectstatic
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
-# 🖼️ ملفات الوسائط (Media Files)
+# 🖼️ إعدادات ملفات الوسائط (Media Files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# ⚙️ الحقول الافتراضية للمفاتيح الأساسية
+# ⚙️ الإعداد الافتراضي للمفاتيح الأساسية
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# 👤 استخدام نموذج المستخدم المخصص
+# 👤 تعريف نموذج المستخدم المخصص
 AUTH_USER_MODEL = 'accounts.User'
