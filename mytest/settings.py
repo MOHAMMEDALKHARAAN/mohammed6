@@ -14,7 +14,8 @@ load_dotenv(BASE_DIR / '.env')
 # ⚙️ إعدادات التطوير (غير مناسبة للإنتاج)
 SECRET_KEY = 'django-insecure-y9ix#$fnds-w%nijgi()csi_!=ttb08ws*1*59*&0w%41u)ss('
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1', 'localhost']
+
 
 # 🧩 تعريف التطبيقات
 INSTALLED_APPS = [
