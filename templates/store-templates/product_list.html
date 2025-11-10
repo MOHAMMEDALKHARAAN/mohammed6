@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>منتجاتنا - متجر SH</title>
+    <style>
+        body {
+            margin: 0;
+            background: #f9f5ee;
+            font-family: 'Cairo', sans-serif;
+            color: #4b3d2a;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            margin: 15px 0 10px;
+            font-size: 1.2em;
+        }
+
+        .product-card p {
+            margin: 5px 0;
+            color: #6e5b3d;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <main>
+        <h1 style="text-align:center; margin-top:30px;">منتجاتنا</h1>
+        <div class="products">
+            {% for product in products %}
+                <div class="product-card">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="/static/default-product.jpg" alt="منتج">
+                    {% endif %}
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.price }} ر.س</p>
+                </div>
+            {% empty %}
+                <p style="text-align:center;">لا توجد منتجات حالياً.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    {% include 'footer.html' %}
+</body>
+</html>
