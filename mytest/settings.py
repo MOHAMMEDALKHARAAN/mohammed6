@@ -48,7 +48,8 @@ ROOT_URLCONF = 'mytest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # مجلد القوالب العام
+        # 🔹 تعريف مجلد القوالب العام في المسار الذي حددته
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,8 +95,8 @@ USE_TZ = True
 
 # 📦 الملفات الثابتة (Static Files)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # مجلد الملفات الثابتة أثناء التطوير
+STATIC_ROOT = BASE_DIR / 'staticfiles'    # مجلد التجميع للإنتاج
 
 
 # 🖼️ ملفات الوسائط (Media Files)
