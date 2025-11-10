@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(180deg, #fdfaf4 0%, #f8f3e7 100%);
+            color: #3f2f1b;
+        }
+
+        main {
+            max-width: 850px;
+            margin: 80px auto;
+            background: #fffaf1;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #4b3d2a;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+        }
+
+        p {
+            color: #6c583d;
+            font-size: 1.2em;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #f5e6ca, #e6d5b8);
+            padding: 10px 20px;
+            border-radius: 15px;
+            display: inline-block;
+            color: #3f2f1b;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        img {
+            width: 130px;
+            margin: 25px auto 10px;
+            display: block;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <main>
+        <h1>من نحن</h1>
+        <div class="highlight">{{ page_title }}</div>
+        <p>{{ about_text }}</p>
+
+        <img src="/static/images/default-logo.png" alt="شعار الموقع">
+        <p>فريق عمل <strong>SH</strong> — حيث الأناقة تلتقي بالجودة.</p>
+    </main>
+
+    {% include 'footer.html' %}
+</body>
+</html>

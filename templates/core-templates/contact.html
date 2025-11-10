@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>اتصل بنا - متجر SH</title>
+    <style>
+        body {
+            background: linear-gradient(180deg, #fdfaf4 0%, #f8f3e7 100%);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #3f2f1b;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 80px auto;
+            background: #fffaf1;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #5a472f;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #7a6547;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, textarea {
+            padding: 12px;
+            border: 1px solid #d8c6a0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1em;
+            background: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #d8c6a0, #e6d5b8);
+            color: #4b3d2a;
+            border: none;
+            padding: 12px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #e6d5b8, #f5e6ca);
+            transform: scale(1.05);
+        }
+
+        .messages {
+            margin-top: 15px;
+        }
+
+        .messages div {
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .messages .success { background: #d4edda; color: #155724; }
+        .messages .error { background: #f8d7da; color: #721c24; }
+        .messages .warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="contact-container">
+        <h1>📩 اتصل بنا</h1>
+        <p>نسعد بتواصلك معنا لأي استفسار أو اقتراح 💬</p>
+
+        <div class="messages">
+            {% for msg in messages %}
+                <div class="{{ msg.tags }}">{{ msg }}</div>
+            {% endfor %}
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="الاسم الكامل" required>
+            <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+            <input type="text" name="subject" placeholder="الموضوع (اختياري)">
+            <textarea name="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+            <button type="submit">إرسال الرسالة ✉️</button>
+        </form>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

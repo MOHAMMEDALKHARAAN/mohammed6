@@ -1,10 +1,15 @@
 from django.urls import path
 from . import views
 
-# 🏠 تطبيق الصفحات العامة (core)
-app_name = 'core'
+# 🌐 تعريف مساحة الأسماء الخاصة بالتطبيق
+app_name = "core"
 
 urlpatterns = [
-    # 🔹 الصفحة الرئيسية للمتجر
-    path('', views.home, name='home'),
+    # 🏡 الصفحة الرئيسية
+    path("", views.home, name="home"),
+
+    # ✉️ صفحة "اتصل بنا"
+    path("contact/", views.contact, name="contact"),
+    # 🧭 صفحة من نحن / عنا
+    path('about/', views.about, name='about'),
 ]
