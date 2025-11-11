@@ -127,3 +127,6 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# 🛒 إعداد السلة (Session-Based Cart)
+CART_SESSION_ID = 'cart'
